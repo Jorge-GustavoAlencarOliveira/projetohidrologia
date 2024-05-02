@@ -1,51 +1,55 @@
 'use client';
 
-import { TinformationSchema, useInformations } from '../hooks/form';
+import { NumericFormat } from 'react-number-format';
 import { equacaoIDF } from '../equacoes/idf';
+import { FormEvent } from 'react';
+import { EquacaoIDFprops } from '../types/types';
 
 type FormProps = {
-  handleResutaldos: (param: string[][]) => void
-}
+  handleResutaldos: (param: string[][]) => void;
+  handleDados: (key: any, value: string) => void;
+  reset: () => void;
+  dados: EquacaoIDFprops;
+};
 
-const Form = ({handleResutaldos}: FormProps) => {
-  const { handleSubmit, errors, register } = useInformations();
-
-  function handleMathIDF(data: TinformationSchema) {
-    handleResutaldos(equacaoIDF(data));
+const Form = ({ handleResutaldos, handleDados, dados, reset }: FormProps) => {
+  function handleMathIDF(e: FormEvent) {
+    e.preventDefault();
+    handleResutaldos(equacaoIDF(dados));
+    // reset();
   }
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(handleMathIDF)}
-        className="flex flex-col gap-4"
-      >
+      <form onSubmit={handleMathIDF} className="flex flex-col gap-4">
         <div className="flex gap-1 justify-center">
           <div className="flex gap-4 items-center justify-center justify-center">
             <label className="block text-gray-700 text-sm font-bold mb-2 text-xl">
               K
             </label>
-            <input
+            <NumericFormat
+              value={dados.k}
               className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              {...register('k')}
+              onValueChange={(values) => handleDados('k', values.value)}
+              allowNegative={false}
+              decimalScale={3}
+              decimalSeparator=","
+              allowLeadingZeros={false}
             />
-            {errors && <span>{errors.k?.message}</span>}
           </div>
           <div className="flex gap-4 items-center justify-center">
             <label className="block text-gray-700 text-sm font-bold mb-2 text-xl">
               a
             </label>
-            <input
+            <NumericFormat
+              value={dados.a}
               className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              {...register('a')}
+              onValueChange={(values) => handleDados('a', values.value)}
+              allowNegative={false}
+              decimalScale={3}
+              decimalSeparator=","
+              allowLeadingZeros={false}
             />
-            {errors && (
-              <span className="text-xs text-red-800 block">
-                {errors.a?.message}
-              </span>
-            )}
           </div>
         </div>
         <div className="flex gap-1">
@@ -53,23 +57,29 @@ const Form = ({handleResutaldos}: FormProps) => {
             <label className="block text-gray-700 text-sm font-bold mb-2 text-xl">
               b
             </label>
-            <input
+            <NumericFormat
+              value={dados.b}
               className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              {...register('b')}
+              onValueChange={(values) => handleDados('b', values.value)}
+              allowNegative={false}
+              decimalScale={3}
+              decimalSeparator=","
+              allowLeadingZeros={false}
             />
-            {errors && <span>{errors.b?.message}</span>}
           </div>
           <div className="flex gap-4 items-center justify-center">
             <label className="block text-gray-700 text-sm font-bold mb-2 text-xl">
               c
             </label>
-            <input
+            <NumericFormat
+              value={dados.c}
               className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              {...register('c')}
+              onValueChange={(values) => handleDados('c', values.value)}
+              allowNegative={false}
+              decimalScale={3}
+              decimalSeparator=","
+              allowLeadingZeros={false}
             />
-            {errors && <span>{errors.c?.message}</span>}
           </div>
         </div>
         <div className="flex">

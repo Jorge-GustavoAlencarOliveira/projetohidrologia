@@ -1,14 +1,11 @@
 import React from 'react'
 import { tempodeRetorno, duracao } from '../libs/constantes';
+import { DataProps } from '../types/types';
 
-type ResultadosProps = {
-  resultados: string[][]
-}
-
-const Table = ({resultados}: ResultadosProps) => {
-  if(resultados.length > 0)
+const Table = ({data}: DataProps) => {
+  if(!!data.length)
   return ( 
-    <div className='my-12'>
+    <div className='my-8'>
       <h6 className='text-center text-2xl mb-2'>Intensidade da chuva em mm/h</h6>
       <table className="mx-auto  min-w-fit table-fixed border-collapse border border-slate-700 text-center">
       <thead>
@@ -16,7 +13,7 @@ const Table = ({resultados}: ResultadosProps) => {
           <th rowSpan={2} className='border border-slate-700 px-2'>
             Duração
           </th>
-          <th className='border border-slate-700' colSpan={7}>Tempo de Retorno</th>
+          <th className='border border-slate-700' colSpan={8}>Tempo de Retorno</th>
         </tr>
         <tr>
           {tempodeRetorno.map((item) => {
@@ -29,7 +26,7 @@ const Table = ({resultados}: ResultadosProps) => {
           return (
             <tr key={index}>
               <td className='font-bold border border-slate-700 px-2'>{item}</td>
-              {resultados?.map((item1, index1) => {
+              {data?.map((item1, index1) => {
                 return <td key={index1} className='border border-slate-700 px-2'>{item1[index]}</td>;
               })}
             </tr>
