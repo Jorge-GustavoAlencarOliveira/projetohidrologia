@@ -1,4 +1,4 @@
-import { objInitialProps, objProps } from '../types/types';
+import { objInitialProps} from '../types/types';
 
 export function tratarDados(
   data: string[][],

@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { DataContextProvider } from './context/dataContext';
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Equação IDF",
-  description: "Equação e curva IDF - Hidrologia",
+  title: 'Equação IDF',
+  description: 'Equação e curva IDF - Hidrologia',
 };
 
 export default function RootLayout({
@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-slate-50 flex min-h-screen justify-center`}>
+        <DataContextProvider>{children}</DataContextProvider>
+      </body>
     </html>
   );
 }

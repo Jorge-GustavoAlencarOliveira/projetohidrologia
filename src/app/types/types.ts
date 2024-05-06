@@ -1,8 +1,8 @@
 export type EquacaoIDFprops = {
-  k?: string;
-  a?: string;
-  b?: string;
-  c?: string;
+  k: string;
+  a: string;
+  b: string;
+  c: string;
 };
 
 export type DataProps = { data: string[][] };

@@ -9,20 +9,28 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { tempodeRetorno, duracao } from '../libs/constantes';
 import { tratarDados } from '../libs/funcoes';
+import { useContextData } from '../context/dataContext';
 
-const Chart = ({ data }: { data: string[][] }) => {
-  const newarray = tratarDados(data, duracao, tempodeRetorno);
+const Chart = () => {
+  const { resultados: data, tempos, duracoes } = useContextData();
+  const newDuracoes = duracoes.map((item) => item.duracao);
+  const newTempos = tempos.map((item) => item.tempo);
+  const newarray = tratarDados(data, newDuracoes, newTempos);
   if (!!data.length)
     return (
-      <div className="flex flex-col">
-        <h6 className="text-center text-2xl mb-2">Curva IDF</h6>
-        <div className="flex items-center w-full">
-          <div className="flex" style={{ transform: 'rotate(-90deg)' }}>
-            <span className="text-center">Intensidade (mm/h)</span>
-          </div>
-          <ResponsiveContainer width="100%" height={400}>
+      <div className="flex flex-col mx-auto">
+        <h6 className="text-center text:sm sm:text-2xl mb-2 font-bold">
+          Curva IDF
+        </h6>
+        <div className="w-full relative">
+          <span
+            className="absolute left-[-75px] bottom-1/2"
+            style={{ transform: 'rotate(-90deg)' }}
+          >
+            Intensidade (mm/h)
+          </span>
+          <ResponsiveContainer width="100%" height={400} minWidth={300}>
             <LineChart
               width={900}
               height={400}
@@ -50,7 +58,7 @@ const Chart = ({ data }: { data: string[][] }) => {
                   <Line
                     key={index}
                     type="monotone"
-                    dataKey={`${tempodeRetorno[index]}`}
+                    dataKey={`${newTempos[index]}`}
                     stroke={`#${Math.floor(Math.random() * 16777215).toString(
                       16,
                     )}`}

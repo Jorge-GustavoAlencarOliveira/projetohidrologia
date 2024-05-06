@@ -1,7 +1,7 @@
-import { tempodeRetorno, duracao } from '../libs/constantes';
 import { EquacaoIDFprops } from '../types/types';
 
-export const equacaoIDF = ({ k, a, b, c }: EquacaoIDFprops) => {
+
+export const equacaoIDF = ({ k, a, b, c }: EquacaoIDFprops, tempodeRetorno: number[], duracao: number[]) => {
   let resultados: string[][] = [];
   tempodeRetorno.map((item) => {
     let resultado: string[] = [];
