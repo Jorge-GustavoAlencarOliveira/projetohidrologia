@@ -25,19 +25,19 @@ const Chart = () => {
         </h6>
         <div className="w-full relative">
           <span
-            className="absolute left-[-75px] bottom-1/2"
+            className="absolute left-[-60px] sm:left-[-90px] bottom-1/2 text-sm sm:text-lg"
             style={{ transform: 'rotate(-90deg)' }}
           >
             Intensidade (mm/h)
           </span>
-          <ResponsiveContainer width="100%" height={400} minWidth={300}>
+          <ResponsiveContainer width="100%" height={400} minWidth={400} >
             <LineChart
               width={900}
               height={400}
               data={newarray}
               margin={{
                 top: 5,
-                right: 30,
+                right: 0,
                 left: 0,
                 bottom: 5,
               }}
@@ -69,7 +69,7 @@ const Chart = () => {
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <span className="text-center mt-4 mx-auto">Duração (min)</span>
+        <span className="text-center mt-4 mx-auto text-sm sm:text-lg">Duração (min)</span>
       </div>
     );
   return null;

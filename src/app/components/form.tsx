@@ -24,6 +24,7 @@ const Form = () => {
 
   function handleMathIDF(e: FormEvent) {
     e.preventDefault();
+    if(duracoes.length === 0 || tempos.length === 0 || dados.k === '' || dados.a === '' || dados.b === '' || dados.c === '') return
     handleResultados(
       equacaoIDF(
         dados,
@@ -53,6 +54,7 @@ const Form = () => {
             />
             <button
               onClick={() => {
+                if(valortempoRetorno === '' || valortempoRetorno === '0') return
                 handleAddTempo(+valortempoRetorno);
                 setValorTempoRetorno('');
               }}
@@ -103,6 +105,7 @@ const Form = () => {
             />
             <button
               onClick={() => {
+                if(valorDuracao === '' || valorDuracao === '0') return
                 handleAddDuracao(+valorDuracao);
                 setValorDuracao('');
               }}
